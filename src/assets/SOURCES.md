@@ -11,6 +11,7 @@ Portfolio previews captured from the public project pages on 2026-09-11:
 - `andys.jpg`: https://andys.rest/
 - `emcotec.jpg`: https://emcotec.ru/
 - `artcom.jpg`: https://www.artcom.ru/
+- `cleanroomshop.jpg`: https://cleanroomshop.ru/
 
 `process.webp` was generated using the built-in ImageGen tool from the selected System concept. Prompt: recreate only the three floating browser panels, white wireframe «Структура 01», warm interior «Дизайн 02», dark code «Разработка 03», isolated on #f5f5f2. Converted lossily to WebP for delivery. No personal portrait was generated.
 

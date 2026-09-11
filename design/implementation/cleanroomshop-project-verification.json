@@ -1,0 +1,41 @@
+{
+  "result": "PASS",
+  "baseline": {
+    "revision": "e0a10cd90a7069fb7fbc4b9d1aafa462e9e23310",
+    "command": "npm test",
+    "input": "Committed portfolio with three published projects",
+    "output": "> orlov-portfolio@0.1.0 test C:\\Work\\port\\.codex-baseline-check\r\n> node tests/check.mjs\r\n\r\nPASS: carousel boundaries, three published projects, HTTPS links, owner contacts, unique IDs, anchors, assets, accessibility hooks, no data collection",
+    "exitStatus": 0
+  },
+  "modified": {
+    "command": "npm run check && npm test && npm run build",
+    "input": "Four published projects including Альфа-Лаб with local screenshot and https://cleanroomshop.ru/",
+    "output": "> orlov-portfolio@0.1.0 check C:\\Work\\port\r\n> node --check src/app.mjs && node --check src/projects.mjs && node --check scripts/serve.mjs && node --check scripts/build.mjs\r\n\r\n\r\n> orlov-portfolio@0.1.0 test C:\\Work\\port\r\n> node tests/check.mjs\r\n\r\nPASS: carousel boundaries, four published projects, HTTPS links, owner contacts, unique IDs, anchors, assets, accessibility hooks, no data collection\r\n\r\n> orlov-portfolio@0.1.0 build C:\\Work\\port\r\n> node scripts/build.mjs\r\n\r\nBuild complete: dist/index.html",
+    "exitStatus": 0
+  },
+  "browser": {
+    "command": "$env:NODE_PATH='C:\\Users\\Garmanika\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\node_modules'; & 'C:\\Users\\Garmanika\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe' tests/browser.cjs",
+    "input": "Preview server at http://127.0.0.1:4173; Chrome; four cards; cleanroomshop detail link; viewports 1440, 1024, 768, 540, 390, 320",
+    "output": "{\n  \"result\": \"PASS\",\n  \"viewports\": [\n    {\n      \"width\": 1440,\n      \"scrollWidth\": 1440,\n      \"broken\": []\n    },\n    {\n      \"width\": 1024,\n      \"scrollWidth\": 1024,\n      \"broken\": []\n    },\n    {\n      \"width\": 768,\n      \"scrollWidth\": 768,\n      \"broken\": []\n    },\n    {\n      \"width\": 540,\n      \"scrollWidth\": 540,\n      \"broken\": []\n    },\n    {\n      \"width\": 390,\n      \"scrollWidth\": 390,\n      \"broken\": []\n    },\n    {\n      \"width\": 320,\n      \"scrollWidth\": 320,\n      \"broken\": []\n    }\n  ],\n  \"checks\": [\n    \"image-only project cards\",\n    \"carousel next/previous/wrap\",\n    \"keyboard\",\n    \"pagination\",\n    \"published project link\",\n    \"project dialog\",\n    \"Escape/focus restoration\",\n    \"owner contact destinations\",\n    \"touch swipe\",\n    \"reduced motion\",\n    \"all images loaded\",\n    \"no horizontal overflow\",\n    \"no browser errors\",\n    \"path traversal rejected\",\n    \"POST rejected\"\n  ]\n}",
+    "exitStatus": 0
+  },
+  "rollback": {
+    "command": "powershell -NoProfile -ExecutionPolicy Bypass -File design/implementation/rollback-cleanroomshop-project.ps1 -CheckOnly",
+    "input": "Final working tree and cleanroomshop-project.patch",
+    "output": "PASS: cleanroomshop project rollback applies cleanly in reverse.",
+    "exitStatus": 0
+  },
+  "artifacts": {
+    "modified": "design/implementation/cleanroomshop-project-dist.zip",
+    "patch": "design/implementation/cleanroomshop-project.patch",
+    "verification": "design/implementation/cleanroomshop-project-verification.json",
+    "rollback": "design/implementation/rollback-cleanroomshop-project.ps1",
+    "baseline": "design/implementation/cleanroomshop-project-baseline.zip"
+  },
+  "hashes": {
+    "baselineArchive": "F3BF3DD9EF40BFBF1F004391186DF53F5CC08ED94AB370771AE3D8A4FBB9F73E",
+    "modifiedArtifact": "CB2D15A7602873CC9D7884E3694C3744A880B303459BA49837E4A08BEC083621",
+    "patch": "A0D0D54A9FD4F30CD474E1112F4D170DEDEDD43C89E43E79D098A776EB8F23ED",
+    "rollback": "2E56E4CABA41376069D9397A639EBD961C3BE6A4EC7AD4180A126DB1A5F4EAFB"
+  }
+}
