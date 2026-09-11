@@ -1,0 +1,68 @@
+const { chromium } = require('playwright');
+const assert = require('assert');
+const fs = require('fs');
+const path = require('path');
+const output = path.resolve(__dirname, '../design/implementation');
+fs.mkdirSync(output, { recursive: true });
+(async () => {
+  const browser = await chromium.launch({headless:true,channel:'chrome'});
+  const page = await browser.newPage({viewport:{width:1440,height:1000},deviceScaleFactor:1});
+  const errors=[];
+  page.on('pageerror', error=>errors.push(error.message));
+  page.on('console', msg=>{if(msg.type()==='error')errors.push(msg.text());});
+  await page.goto('http://127.0.0.1:4173', {waitUntil:'networkidle'});
+  await page.evaluate(()=>document.fonts.ready);
+  await page.screenshot({path:path.join(output,'desktop.png'),fullPage:true});
+  assert.equal(await page.locator('#project-title').textContent(),'Форма');
+  await page.locator('#next').click();
+  assert.equal(await page.locator('#project-title').textContent(),'Предмет');
+  await page.locator('#next').click();
+  assert.equal(await page.locator('#project-title').textContent(),'Тихо');
+  await page.locator('#next').click();
+  assert.equal(await page.locator('#project-title').textContent(),'Форма');
+  await page.locator('.project-slider').focus();
+  await page.keyboard.press('ArrowLeft');
+  assert.equal(await page.locator('#project-title').textContent(),'Тихо');
+  await page.locator('[data-slide="0"]').click();
+  await page.locator('#project-open').click();
+  assert(await page.locator('#project-dialog').evaluate(n=>n.open));
+  assert.equal(await page.locator('#detail-title').textContent(),'Форма');
+  await page.keyboard.press('Escape');
+  assert(!await page.locator('#project-dialog').evaluate(n=>n.open));
+  assert.equal(await page.evaluate(()=>document.activeElement.id),'project-open');
+  await page.locator('.button-primary').click();
+  assert(await page.locator('#contact-dialog').evaluate(n=>n.open));
+  assert.equal(await page.locator('#contact-links a').first().getAttribute('href'),'https://t.me/Garmanika');
+  assert((await page.locator('#contact-links a').nth(1).getAttribute('href')).startsWith('mailto:aleks.orlov97%40gmail.com'));
+  await page.keyboard.press('Escape');
+  const viewports=[];
+  for (const width of [1440,1024,768,540,390,320]) {
+    await page.setViewportSize({width,height:900});
+    await page.waitForTimeout(120);
+    const metrics=await page.evaluate(()=>({width:innerWidth,scrollWidth:document.documentElement.scrollWidth,broken:[...document.images].filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.src)}));
+    assert(metrics.scrollWidth<=width,`Horizontal overflow at ${width}: ${metrics.scrollWidth}`);
+    assert.deepEqual(metrics.broken,[]);
+    viewports.push(metrics);
+  }
+  await page.setViewportSize({width:390,height:844});
+  await page.evaluate(()=>document.activeElement.blur());
+  await page.evaluate(()=>scrollTo(0,0));
+  await page.screenshot({path:path.join(output,'mobile.png'),fullPage:true});
+  // Exercise the exact touch handler without sending a request or navigating away.
+  await page.locator('.slider-viewport').evaluate(n=>{
+    const touch=(x,y)=>new Touch({identifier:1,target:n,clientX:x,clientY:y});
+    n.dispatchEvent(new TouchEvent('touchstart',{touches:[touch(300,100)]}));
+    n.dispatchEvent(new TouchEvent('touchend',{changedTouches:[touch(100,105)]}));
+  });
+  assert.equal(await page.locator('#project-title').textContent(),'Предмет');
+  await page.emulateMedia({reducedMotion:'reduce'});
+  assert.equal(await page.locator('.slider-track').evaluate(n=>getComputedStyle(n).transitionDuration),'0s');
+  const response=await page.request.get('http://127.0.0.1:4173/%2e%2e%5cREADME.md');
+  assert([403,404].includes(response.status()));
+  assert.equal((await page.request.post('http://127.0.0.1:4173/')).status(),405);
+  assert.deepEqual(errors,[],'Browser errors');
+  const report={result:'PASS',viewports,checks:['carousel next/previous/wrap','keyboard','pagination','project dialog','Escape/focus restoration','owner contact destinations','touch swipe','reduced motion','all images loaded','no horizontal overflow','no browser errors','path traversal rejected','POST rejected']};
+  fs.writeFileSync(path.join(output,'verification.json'),JSON.stringify(report,null,2));
+  console.log(JSON.stringify(report,null,2));
+  await browser.close();
+})().catch(e=>{console.error(e);process.exit(1);});

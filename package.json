@@ -1,0 +1,12 @@
+{
+  "name": "orlov-portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Freelance portfolio — System concept",
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "build": "node scripts/build.mjs",
+    "test": "node tests/check.mjs",
+    "check": "node --check src/app.mjs && node --check src/projects.mjs && node --check scripts/serve.mjs && node --check scripts/build.mjs"
+  }
+}

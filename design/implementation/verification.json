@@ -1,0 +1,50 @@
+{
+  "result": "PASS",
+  "viewports": [
+    {
+      "width": 1440,
+      "scrollWidth": 1440,
+      "broken": []
+    },
+    {
+      "width": 1024,
+      "scrollWidth": 1024,
+      "broken": []
+    },
+    {
+      "width": 768,
+      "scrollWidth": 768,
+      "broken": []
+    },
+    {
+      "width": 540,
+      "scrollWidth": 540,
+      "broken": []
+    },
+    {
+      "width": 390,
+      "scrollWidth": 390,
+      "broken": []
+    },
+    {
+      "width": 320,
+      "scrollWidth": 320,
+      "broken": []
+    }
+  ],
+  "checks": [
+    "carousel next/previous/wrap",
+    "keyboard",
+    "pagination",
+    "project dialog",
+    "Escape/focus restoration",
+    "owner contact destinations",
+    "touch swipe",
+    "reduced motion",
+    "all images loaded",
+    "no horizontal overflow",
+    "no browser errors",
+    "path traversal rejected",
+    "POST rejected"
+  ]
+}
