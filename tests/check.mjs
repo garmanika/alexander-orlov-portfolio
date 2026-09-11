@@ -10,10 +10,12 @@ for (const [input, expected] of [[-1,2],[0,0],[1,1],[2,2],[3,0],[7,1],[-7,2]]) a
 assert.throws(() => wrapIndex(1,0), TypeError);
 assert.throws(() => wrapIndex(1.5), TypeError);
 for (const project of projects) {
-  assert(project.name && project.alt && project.description);
+  assert(project.name && project.alt && project.description && project.nav.length);
   assert(fs.existsSync(path.join(root,'src',project.image)));
-  assert.equal(project.url, null, 'Demo projects must not pretend to have published URLs');
+  const url = new URL(project.url);
+  assert.equal(url.protocol, 'https:');
 }
+assert.deepEqual(projects.map(project => new URL(project.url).hostname), ['andys.rest','emcotec.ru','www.artcom.ru']);
 assert.equal(contact.telegram, '@Garmanika');
 assert.equal(contact.email, 'aleks.orlov97@gmail.com');
 const html = fs.readFileSync(path.join(root,'src/index.html'),'utf8');
@@ -32,4 +34,4 @@ const css=fs.readFileSync(path.join(root,'src/styles.css'),'utf8');
 for(const match of css.matchAll(/url\('([^']+)'\)/g)) assert(fs.existsSync(path.join(root,'src',match[1])),'Missing '+match[1]);
 assert(css.includes('prefers-reduced-motion'));
 assert(css.includes(':focus-visible'));
-console.log('PASS: carousel boundaries, three demo projects, owner contacts, unique IDs, anchors, assets, accessibility hooks, no data collection');
+console.log('PASS: carousel boundaries, three published projects, HTTPS links, owner contacts, unique IDs, anchors, assets, accessibility hooks, no data collection');

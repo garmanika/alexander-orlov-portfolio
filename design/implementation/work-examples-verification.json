@@ -1,0 +1,40 @@
+{
+  "result": "PASS",
+  "baseline": {
+    "revision": "e9586f3fbfa21fce081320d1840e751d367dc82e",
+    "command": "npm test",
+    "input": "Repository baseline at HEAD before portfolio content replacement",
+    "output": "> orlov-portfolio@0.1.0 test C:\\Work\\port\\.codex-baseline-check\r\n> node tests/check.mjs\r\n\r\nPASS: carousel boundaries, three demo projects, owner contacts, unique IDs, anchors, assets, accessibility hooks, no data collection",
+    "exitStatus": 0
+  },
+  "modified": {
+    "command": "npm run check && npm test && npm run build",
+    "input": "Working tree with Andy's, ЭМСОТЕХ and АРТКОМ project data, local previews and HTTPS links",
+    "output": "> orlov-portfolio@0.1.0 check C:\\Work\\port\r\n> node --check src/app.mjs && node --check src/projects.mjs && node --check scripts/serve.mjs && node --check scripts/build.mjs\r\n\r\n\r\n> orlov-portfolio@0.1.0 test C:\\Work\\port\r\n> node tests/check.mjs\r\n\r\nPASS: carousel boundaries, three published projects, HTTPS links, owner contacts, unique IDs, anchors, assets, accessibility hooks, no data collection\r\n\r\n> orlov-portfolio@0.1.0 build C:\\Work\\port\r\n> node scripts/build.mjs\r\n\r\nBuild complete: dist/index.html",
+    "exitStatus": 0
+  },
+  "browser": {
+    "command": "$env:NODE_PATH='C:\\Users\\Garmanika\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\node_modules'; & 'C:\\Users\\Garmanika\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe' tests/browser.cjs",
+    "input": "Preview server at http://127.0.0.1:4173; Chrome; viewports 1440, 1024, 768, 540, 390, 320",
+    "output": "{\r\n  \"result\": \"PASS\",\r\n  \"viewports\": [\r\n    {\r\n      \"width\": 1440,\r\n      \"scrollWidth\": 1440,\r\n      \"broken\": []\r\n    },\r\n    {\r\n      \"width\": 1024,\r\n      \"scrollWidth\": 1024,\r\n      \"broken\": []\r\n    },\r\n    {\r\n      \"width\": 768,\r\n      \"scrollWidth\": 768,\r\n      \"broken\": []\r\n    },\r\n    {\r\n      \"width\": 540,\r\n      \"scrollWidth\": 540,\r\n      \"broken\": []\r\n    },\r\n    {\r\n      \"width\": 390,\r\n      \"scrollWidth\": 390,\r\n      \"broken\": []\r\n    },\r\n    {\r\n      \"width\": 320,\r\n      \"scrollWidth\": 320,\r\n      \"broken\": []\r\n    }\r\n  ],\r\n  \"checks\": [\r\n    \"carousel next/previous/wrap\",\r\n    \"keyboard\",\r\n    \"pagination\",\r\n    \"published project link\",\r\n    \"project dialog\",\r\n    \"Escape/focus restoration\",\r\n    \"owner contact destinations\",\r\n    \"touch swipe\",\r\n    \"reduced motion\",\r\n    \"all images loaded\",\r\n    \"no horizontal overflow\",\r\n    \"no browser errors\",\r\n    \"path traversal rejected\",\r\n    \"POST rejected\"\r\n  ]\r\n}",
+    "exitStatus": 0
+  },
+  "hashes": {
+    "baselineArchive": "226255E8D507402FFCE429548936209D41A56463F6D83479AA4CD85EAF1276B5",
+    "modifiedIndex": "F002B1E3EF839DB21BA6EDD7ED4C06E4D141582B8783B7281EAEEB08BED0B489",
+    "patch": "2397DBB5ECD096A0A605CF97536EA5116E26247080BF976432ED69E10027A278",
+    "rollback": "6978773FB7ECE456456B923E1847D8BAB752C34E96227AEE07778CF69D193DA5"
+  },
+  "rollback": {
+    "command": "powershell -NoProfile -ExecutionPolicy Bypass -File design/implementation/rollback-portfolio-works.ps1 -CheckOnly",
+    "input": "Final working tree and portfolio-works.patch",
+    "output": "PASS: rollback patch applies cleanly in reverse.",
+    "exitStatus": 0
+  },
+  "modifiedArtifact": {
+    "path": "dist/index.html",
+    "sha256": "F002B1E3EF839DB21BA6EDD7ED4C06E4D141582B8783B7281EAEEB08BED0B489",
+    "reopened": true,
+    "marker": true
+  }
+}

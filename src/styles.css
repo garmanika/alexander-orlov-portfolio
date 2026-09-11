@@ -462,27 +462,20 @@ h1 {
 .preview-footer>span:last-child {
   white-space:pre-line;
   max-width:200px}
-.project-card[data-project="predmet"] {
-  background:#eae4d9}
-.project-card[data-project="predmet"] .preview-copy h4 {
-  font-family:Georgia,serif;
-  letter-spacing:-.05em}
-.project-card[data-project="tiho"] .preview-body {
-  display:block}
-.project-card[data-project="tiho"] .preview-copy {
-  position:absolute;
-  inset:0;
-  background:linear-gradient(90deg,#0c261ed9,transparent);
-  padding:50px 32px;
+.project-card[data-project="andys"] {
+  background:#2d302f;
   color:#fff}
-.project-card[data-project="tiho"] .preview-copy h4 {
-  font-family:Georgia,serif;
-  font-size:36px;
-  letter-spacing:-.04em}
-.project-card[data-project="tiho"] .preview-copy p {
-  margin-bottom:28px}
-.project-card[data-project="tiho"] .preview-cta {
-  text-decoration-color:#eae4d9}
+.project-card[data-project="andys"] .preview-nav,
+.project-card[data-project="andys"] .preview-footer {
+  border-color:#4c4e4d}
+.project-card[data-project="andys"] .preview-cta {
+  text-decoration-color:#e9a53a}
+.project-card[data-project="emcotec"] .preview-cta {
+  text-decoration-color:#1715ad}
+.project-card[data-project="artcom"] {
+  background:#f1f1f1}
+.project-card[data-project="artcom"] .preview-cta {
+  text-decoration-color:#f20b18}
 .slider-bottom {
   display:flex;
   gap:60px;
@@ -574,6 +567,9 @@ dialog .dialog-note {
   height:auto;
   max-height:50vh;
   object-fit:cover;
+  margin-top:24px}
+.dialog-actions {
+  display:flex;
   margin-top:24px}
 #contact-links {
   display:flex;

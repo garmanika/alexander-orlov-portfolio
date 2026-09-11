@@ -25,7 +25,7 @@ function createCard(project, index) {
   dots.append(...Array.from({ length: 3 }, () => element('i')));
   const nav = element('div', 'preview-nav');
   nav.setAttribute('aria-hidden', 'true');
-  nav.append(element('span', 'preview-logo', project.name), ...['Проекты', 'Услуги', 'О студии', 'Контакты', 'Обсудить проект →'].map(label => element('span', '', label)));
+  nav.append(element('span', 'preview-logo', project.name), ...project.nav.map(label => element('span', '', label)), element('span', '', 'Открыть сайт →'));
   const body = element('div', 'preview-body');
   const copy = element('div', 'preview-copy');
   copy.append(element('h4', '', project.headline), element('p', '', project.subtitle), element('span', 'preview-cta', `${project.action} →`));
@@ -34,7 +34,7 @@ function createCard(project, index) {
   body.append(copy, image);
   const footer = element('div', 'preview-footer');
   footer.setAttribute('aria-hidden', 'true');
-  footer.append(element('span', '', '01 / 06'), element('span', '', project.note));
+  footer.append(element('span', '', `${String(index + 1).padStart(2, '0')} / ${String(projects.length).padStart(2, '0')}`), element('span', '', project.note));
   card.append(dots, nav, body, footer);
   card.addEventListener('click', () => { if (current !== index) showSlide(index); else openProject(); });
   return card;
@@ -120,6 +120,7 @@ function openProject() {
   $('#detail-description').textContent = project.description;
   $('#detail-image').src = project.image;
   $('#detail-image').alt = project.alt;
+  $('#detail-link').href = project.url;
   openDialog($('#project-dialog'));
 }
 $('#project-open').addEventListener('click', openProject);
