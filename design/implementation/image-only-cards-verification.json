@@ -1,0 +1,42 @@
+{
+  "result": "PASS",
+  "baseline": {
+    "revision": "ac10160fcf4b0665b940e4ed43d2da45c6c14dda",
+    "command": "npm test",
+    "input": "Committed portfolio with duplicated description and action inside each project preview",
+    "output": "> orlov-portfolio@0.1.0 test C:\\Work\\port\\.codex-baseline-check\r\n> node tests/check.mjs\r\n\r\nPASS: carousel boundaries, three published projects, HTTPS links, owner contacts, unique IDs, anchors, assets, accessibility hooks, no data collection",
+    "exitStatus": 0
+  },
+  "modified": {
+    "command": "npm run check && npm test && npm run build",
+    "input": "Project cards render the public-site screenshot directly after the browser dots; adjacent project info retains description and action",
+    "output": "> orlov-portfolio@0.1.0 check C:\\Work\\port\r\n> node --check src/app.mjs && node --check src/projects.mjs && node --check scripts/serve.mjs && node --check scripts/build.mjs\r\n\r\n\r\n> orlov-portfolio@0.1.0 test C:\\Work\\port\r\n> node tests/check.mjs\r\n\r\nPASS: carousel boundaries, three published projects, HTTPS links, owner contacts, unique IDs, anchors, assets, accessibility hooks, no data collection\r\n\r\n> orlov-portfolio@0.1.0 build C:\\Work\\port\r\n> node scripts/build.mjs\r\n\r\nBuild complete: dist/index.html",
+    "exitStatus": 0
+  },
+  "browser": {
+    "command": "$env:NODE_PATH='C:\\Users\\Garmanika\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\node_modules'; & 'C:\\Users\\Garmanika\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe' tests/browser.cjs",
+    "input": "Preview server at http://127.0.0.1:4173; Chrome; image-only DOM assertion; viewports 1440, 1024, 768, 540, 390, 320",
+    "output": "{\n  \"result\": \"PASS\",\n  \"viewports\": [\n    {\n      \"width\": 1440,\n      \"scrollWidth\": 1440,\n      \"broken\": []\n    },\n    {\n      \"width\": 1024,\n      \"scrollWidth\": 1024,\n      \"broken\": []\n    },\n    {\n      \"width\": 768,\n      \"scrollWidth\": 768,\n      \"broken\": []\n    },\n    {\n      \"width\": 540,\n      \"scrollWidth\": 540,\n      \"broken\": []\n    },\n    {\n      \"width\": 390,\n      \"scrollWidth\": 390,\n      \"broken\": []\n    },\n    {\n      \"width\": 320,\n      \"scrollWidth\": 320,\n      \"broken\": []\n    }\n  ],\n  \"checks\": [\n    \"image-only project cards\",\n    \"carousel next/previous/wrap\",\n    \"keyboard\",\n    \"pagination\",\n    \"published project link\",\n    \"project dialog\",\n    \"Escape/focus restoration\",\n    \"owner contact destinations\",\n    \"touch swipe\",\n    \"reduced motion\",\n    \"all images loaded\",\n    \"no horizontal overflow\",\n    \"no browser errors\",\n    \"path traversal rejected\",\n    \"POST rejected\"\n  ]\n}",
+    "exitStatus": 0
+  },
+  "rollback": {
+    "command": "powershell -NoProfile -ExecutionPolicy Bypass -File design/implementation/rollback-image-only-cards.ps1 -CheckOnly",
+    "input": "Final working tree and image-only-cards.patch",
+    "output": "PASS: image-only card rollback applies cleanly in reverse.",
+    "exitStatus": 0
+  },
+  "artifacts": {
+    "modified": "design/implementation/image-only-cards-dist.zip",
+    "patch": "design/implementation/image-only-cards.patch",
+    "verification": "design/implementation/image-only-cards-verification.json",
+    "rollback": "design/implementation/rollback-image-only-cards.ps1",
+    "baseline": "design/implementation/image-only-cards-baseline.zip"
+  },
+  "hashes": {
+    "baselineArchive": "C589501B83E5EFC5E374E1E5CCAD92391A566D9D22549A3B6D33FAFD1F025542",
+    "modifiedIndex": "F002B1E3EF839DB21BA6EDD7ED4C06E4D141582B8783B7281EAEEB08BED0B489",
+    "patch": "0B69823395371973726ADC2F13EAEEF50EB6494BCC69F65E5169C52B2434A1FA",
+    "rollback": "A01A4756B7CC1148A194C23A37758132454745E9DE0D356434B26388E598FAA8",
+    "modifiedArtifact": "F77BEAE0832A89A4150CD8E02AE50B95918E63E444B7117AB51F9F871FB6D8EF"
+  }
+}

@@ -33,6 +33,7 @@
     }
   ],
   "checks": [
+    "image-only project cards",
     "carousel next/previous/wrap",
     "keyboard",
     "pagination",

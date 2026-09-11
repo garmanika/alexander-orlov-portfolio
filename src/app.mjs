@@ -23,19 +23,9 @@ function createCard(project, index) {
   const dots = element('div', 'browser-dots');
   dots.setAttribute('aria-hidden', 'true');
   dots.append(...Array.from({ length: 3 }, () => element('i')));
-  const nav = element('div', 'preview-nav');
-  nav.setAttribute('aria-hidden', 'true');
-  nav.append(element('span', 'preview-logo', project.name), ...project.nav.map(label => element('span', '', label)), element('span', '', 'Открыть сайт →'));
-  const body = element('div', 'preview-body');
-  const copy = element('div', 'preview-copy');
-  copy.append(element('h4', '', project.headline), element('p', '', project.subtitle), element('span', 'preview-cta', `${project.action} →`));
   const image = element('img');
-  image.src = project.image; image.alt = project.alt; image.width = 1400; image.height = 950; image.decoding = 'async';
-  body.append(copy, image);
-  const footer = element('div', 'preview-footer');
-  footer.setAttribute('aria-hidden', 'true');
-  footer.append(element('span', '', `${String(index + 1).padStart(2, '0')} / ${String(projects.length).padStart(2, '0')}`), element('span', '', project.note));
-  card.append(dots, nav, body, footer);
+  image.src = project.image; image.alt = project.alt; image.width = 1400; image.height = 760; image.decoding = 'async';
+  card.append(dots, image);
   card.addEventListener('click', () => { if (current !== index) showSlide(index); else openProject(); });
   return card;
 }

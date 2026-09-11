@@ -10,7 +10,8 @@ for (const [input, expected] of [[-1,2],[0,0],[1,1],[2,2],[3,0],[7,1],[-7,2]]) a
 assert.throws(() => wrapIndex(1,0), TypeError);
 assert.throws(() => wrapIndex(1.5), TypeError);
 for (const project of projects) {
-  assert(project.name && project.alt && project.description && project.nav.length);
+  assert(project.name && project.alt && project.description);
+  assert(!('headline' in project) && !('subtitle' in project) && !('action' in project) && !('note' in project) && !('nav' in project));
   assert(fs.existsSync(path.join(root,'src',project.image)));
   const url = new URL(project.url);
   assert.equal(url.protocol, 'https:');
