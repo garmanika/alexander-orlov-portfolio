@@ -1,0 +1,33 @@
+{
+  "result": "PASS",
+  "repository": {
+    "url": "https://github.com/garmanika/alexander-orlov-portfolio",
+    "visibility": "public",
+    "pagesBuildType": "workflow",
+    "expectedPageUrl": "https://garmanika.github.io/alexander-orlov-portfolio/"
+  },
+  "localVerification": {
+    "command": "npm run check && npm test && npm run build",
+    "input": "Current main working tree with GitHub Pages workflow",
+    "output": "> orlov-portfolio@0.1.0 check C:\\Work\\port\r\n> node --check src/app.mjs && node --check src/projects.mjs && node --check scripts/serve.mjs && node --check scripts/build.mjs\r\n\r\n\r\n> orlov-portfolio@0.1.0 test C:\\Work\\port\r\n> node tests/check.mjs\r\n\r\nPASS: carousel boundaries, four published projects, HTTPS links, owner contacts, unique IDs, anchors, assets, accessibility hooks, no data collection\r\n\r\n> orlov-portfolio@0.1.0 build C:\\Work\\port\r\n> node scripts/build.mjs\r\n\r\nBuild complete: dist/index.html",
+    "exitStatus": 0
+  },
+  "rollback": {
+    "command": "powershell -NoProfile -ExecutionPolicy Bypass -File design/implementation/rollback-github-pages.ps1 -CheckOnly",
+    "output": "PASS: GitHub Pages workflow rollback applies cleanly in reverse.",
+    "exitStatus": 0
+  },
+  "artifacts": {
+    "modified": ".github/workflows/pages.yml",
+    "patch": "design/implementation/github-pages-deployment.patch",
+    "verification": "design/implementation/github-pages-verification.json",
+    "rollback": "design/implementation/rollback-github-pages.ps1",
+    "baseline": "design/implementation/github-pages-baseline.zip"
+  },
+  "hashes": {
+    "workflow": "89152D858DFC201EF7ED069432C5CEFCC11D6EB15255A40181FC721F7BD8FF70",
+    "patch": "C3B94EEC35D9CFFA545AC078E7217310F9778771B85D3D84A3CE1760EBDB6451",
+    "rollback": "E938CD7AD41C662EA28483D0A1A5F6AC8BBFC09D16DE9E1BFF23EFF7F8BCDCCD",
+    "baseline": "F4F6F21263639440AB516CC3E5160BF1A639CF0E130DE55CAF8A1CDF9ABE4A53"
+  }
+}
