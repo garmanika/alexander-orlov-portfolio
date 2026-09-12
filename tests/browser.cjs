@@ -48,7 +48,15 @@ fs.mkdirSync(output, { recursive: true });
   const imageChecks=[];
   for (const width of [1440,1024,769,768,540,390,320]) {
     await page.setViewportSize({width,height:900});
-    await page.evaluate(()=>Promise.all([...document.querySelectorAll(".project-card img")].map(n=>n.decode())));
+    await page.waitForFunction(useMobile=>[...document.querySelectorAll('.project-card img')].every(image=>
+      image.complete && image.naturalWidth>0 && image.currentSrc.includes('-mobile.jpg')===useMobile
+    ),width<=768);
+    const sliderLayout = await page.locator('.project-slider').evaluate(n=>({
+      display:getComputedStyle(n).display,
+      direction:getComputedStyle(n).flexDirection
+    }));
+    assert.equal(sliderLayout.display,width<=768?'flex':'grid',`Wrong slider layout at ${width}px`);
+    if (width<=768) assert.equal(sliderLayout.direction,'column',`Wrong slider direction at ${width}px`);
     const metrics=await page.evaluate(()=>({width:innerWidth,scrollWidth:document.documentElement.scrollWidth,broken:[...document.images].filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.src)}));
     assert(metrics.scrollWidth<=width,`Horizontal overflow at ${width}: ${metrics.scrollWidth}`);
     assert.deepEqual(metrics.broken,[]);
