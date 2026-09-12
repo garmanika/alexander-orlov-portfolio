@@ -7,6 +7,10 @@
     "dev": "node scripts/serve.mjs",
     "build": "node scripts/build.mjs",
     "test": "node tests/check.mjs",
+    "test:browser": "node scripts/test-browser.mjs",
     "check": "node --check src/app.mjs && node --check src/projects.mjs && node --check scripts/serve.mjs && node --check scripts/build.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
   }
 }

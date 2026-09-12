@@ -393,7 +393,8 @@ h1 {
   box-shadow:0 10px 24px #1717100a;
   flex:0 0 88%;
   min-width:0;
-  height:505px;
+  height:auto;
+  align-self:flex-start;
   overflow:hidden;
   position:relative;
   cursor:pointer;
@@ -406,8 +407,8 @@ h1 {
   background:#eae9e5}
 .project-card>img {
   width:100%;
-  height:calc(100% - 23px);
-  object-fit:cover;
+  height:auto;
+  object-fit:contain;
   object-position:top center;
   display:block;
   min-height:0}
@@ -501,7 +502,7 @@ dialog .dialog-note {
   width:100%;
   height:auto;
   max-height:50vh;
-  object-fit:cover;
+  object-fit:contain;
   margin-top:24px}
 .dialog-actions {
   display:flex;
@@ -593,7 +594,7 @@ h1 {
 .project-info {
   padding-right:20px}
 .project-card {
-  height:455px;
+  height:auto;
   flex-basis:94%}
 .project-info {
   min-height:455px}
@@ -673,7 +674,7 @@ h1 {
   min-height:400px;
   padding-right:15px}
 .project-card {
-  height:400px;
+  height:auto;
   flex-basis:100%}
 .project-count strong {
   font-size:60px}
@@ -838,7 +839,7 @@ h1 {
   width:100%;
   order:2}
 .project-card {
-  height:355px;
+  height:auto;
   flex-basis:94%}
 .slider-track {
   gap:18px}
