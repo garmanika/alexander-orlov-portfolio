@@ -13,7 +13,7 @@ fs.mkdirSync(output, { recursive: true });
   page.on('console', msg=>{if(msg.type()==='error')errors.push(msg.text());});
   await page.goto(base, {waitUntil:'networkidle'});
   await page.evaluate(()=>document.fonts.ready);
-  assert.equal(await page.locator('.project-card > img').count(),4);
+  assert.equal(await page.locator('.project-card > picture > img').count(),4);
   assert.equal(await page.locator('.project-card .preview-copy, .project-card .preview-nav, .project-card .preview-footer').count(),0);
   await page.screenshot({path:path.join(output,'desktop.png'),fullPage:true});
   assert.equal(await page.locator('#project-title').textContent(),"Andy's");
@@ -48,14 +48,16 @@ fs.mkdirSync(output, { recursive: true });
   const imageChecks=[];
   for (const width of [1440,1024,768,540,390,320]) {
     await page.setViewportSize({width,height:900});
-    await page.waitForTimeout(120);
+    await page.evaluate(()=>Promise.all([...document.querySelectorAll(".project-card img")].map(n=>n.decode())));
     const metrics=await page.evaluate(()=>({width:innerWidth,scrollWidth:document.documentElement.scrollWidth,broken:[...document.images].filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.src)}));
     assert(metrics.scrollWidth<=width,`Horizontal overflow at ${width}: ${metrics.scrollWidth}`);
     assert.deepEqual(metrics.broken,[]);
     viewports.push(metrics);
     for (let i=0;i<4;i++) {
       await page.locator(`[data-slide="${i}"]`).click();
-      const card = page.locator('.project-card[aria-hidden="false"] > img');
+      const card = page.locator('.project-card[aria-hidden="false"] > picture > img');
+      await card.evaluate(n=>n.decode());
+      assert.equal(await card.evaluate(n=>n.currentSrc.includes("-mobile.jpg")),width<=540,"Wrong picture source");
       const image = await card.evaluate(n=>({width:n.clientWidth,height:n.clientHeight,naturalWidth:n.naturalWidth,naturalHeight:n.naturalHeight,fit:getComputedStyle(n).objectFit}));
       assert(image.naturalWidth>0);
       assert(Math.abs(image.height-image.width*image.naturalHeight/image.naturalWidth)<2, `Cropped card ${i} at ${width}px`);
@@ -97,3 +99,4 @@ fs.mkdirSync(output, { recursive: true });
   console.log(JSON.stringify(report,null,2));
   await browser.close();
 })().catch(e=>{console.error(e);process.exit(1);});
+

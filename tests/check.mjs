@@ -13,6 +13,7 @@ for (const project of projects) {
   assert(project.name && project.alt && project.description);
   assert(!('headline' in project) && !('subtitle' in project) && !('action' in project) && !('note' in project) && !('nav' in project));
   assert(fs.existsSync(path.join(root,'src',project.image)));
+  assert(fs.existsSync(path.join(root,'src',project.mobileImage)));
   const url = new URL(project.url);
   assert.equal(url.protocol, 'https:');
 }

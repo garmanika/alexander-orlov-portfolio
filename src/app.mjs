@@ -25,7 +25,14 @@ function createCard(project, index) {
   dots.append(...Array.from({ length: 3 }, () => element('i')));
   const image = element('img');
   image.src = project.image; image.alt = project.alt; image.width = 1400; image.height = 760; image.decoding = 'async';
-  card.append(dots, image);
+  const picture = element('picture');
+  const mobile = element('source');
+  mobile.media = '(max-width: 540px)';
+  mobile.srcset = project.mobileImage;
+  mobile.setAttribute('width', '390');
+  mobile.setAttribute('height', '760');
+  picture.append(mobile, image);
+  card.append(dots, picture);
   card.addEventListener('click', () => { if (current !== index) showSlide(index); else openProject(); });
   return card;
 }
