@@ -706,6 +706,12 @@ h1 {
 .footer>span:nth-child(2) {
   display:none}
 }
+@media(max-width:768px) {
+  .project-card {
+  flex-basis:100%}
+.project-card>picture {
+  aspect-ratio:390 / 760}
+}
 @media(max-width:540px) {
   .header {
   padding:20px 0 17px;
@@ -847,10 +853,6 @@ h1 {
   flex-basis:94%}
 .slider-track {
   gap:18px}
-.project-card {
-  flex-basis:100%}
-.project-card>picture {
-  aspect-ratio:390 / 760}
 .slider-bottom {
   margin-top:26px}
 .works {

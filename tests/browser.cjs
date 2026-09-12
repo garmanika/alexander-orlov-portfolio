@@ -46,7 +46,7 @@ fs.mkdirSync(output, { recursive: true });
   await page.keyboard.press('Escape');
   const viewports=[];
   const imageChecks=[];
-  for (const width of [1440,1024,768,540,390,320]) {
+  for (const width of [1440,1024,769,768,540,390,320]) {
     await page.setViewportSize({width,height:900});
     await page.evaluate(()=>Promise.all([...document.querySelectorAll(".project-card img")].map(n=>n.decode())));
     const metrics=await page.evaluate(()=>({width:innerWidth,scrollWidth:document.documentElement.scrollWidth,broken:[...document.images].filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.src)}));
@@ -57,7 +57,7 @@ fs.mkdirSync(output, { recursive: true });
       await page.locator(`[data-slide="${i}"]`).click();
       const card = page.locator('.project-card[aria-hidden="false"] > picture > img');
       await card.evaluate(n=>n.decode());
-      assert.equal(await card.evaluate(n=>n.currentSrc.includes("-mobile.jpg")),width<=540,"Wrong picture source");
+      assert.equal(await card.evaluate(n=>n.currentSrc.includes("-mobile.jpg")),width<=768,"Wrong picture source");
       const image = await card.evaluate(n=>({width:n.clientWidth,height:n.clientHeight,naturalWidth:n.naturalWidth,naturalHeight:n.naturalHeight,fit:getComputedStyle(n).objectFit}));
       assert(image.naturalWidth>0);
       assert(Math.abs(image.height-image.width*image.naturalHeight/image.naturalWidth)<2, `Cropped card ${i} at ${width}px`);

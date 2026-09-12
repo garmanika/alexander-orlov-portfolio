@@ -27,7 +27,7 @@ function createCard(project, index) {
   image.src = project.image; image.alt = project.alt; image.width = 1400; image.height = 760; image.decoding = 'async';
   const picture = element('picture');
   const mobile = element('source');
-  mobile.media = '(max-width: 540px)';
+  mobile.media = '(max-width: 768px)';
   mobile.srcset = project.mobileImage;
   mobile.setAttribute('width', '390');
   mobile.setAttribute('height', '760');
