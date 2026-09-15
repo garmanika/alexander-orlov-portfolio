@@ -4,9 +4,9 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { projects, wrapIndex, contact } from '../src/projects.mjs';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-assert.equal(projects.length, 4);
+assert.equal(projects.length, 5);
 assert.equal(new Set(projects.map(p => p.id)).size, projects.length);
-for (const [input, expected] of [[-1,3],[0,0],[1,1],[2,2],[3,3],[4,0],[7,3],[-7,1]]) assert.equal(wrapIndex(input), expected);
+for (const [input, expected] of [[-1,4],[0,0],[1,1],[2,2],[3,3],[4,4],[5,0],[7,2],[-7,3]]) assert.equal(wrapIndex(input), expected);
 assert.throws(() => wrapIndex(1,0), TypeError);
 assert.throws(() => wrapIndex(1.5), TypeError);
 for (const project of projects) {
@@ -17,7 +17,7 @@ for (const project of projects) {
   const url = new URL(project.url);
   assert.equal(url.protocol, 'https:');
 }
-assert.deepEqual(projects.map(project => new URL(project.url).hostname), ['andys.rest','emcotec.ru','www.artcom.ru','cleanroomshop.ru']);
+assert.deepEqual(projects.map(project => new URL(project.url).hostname), ['andys.rest','emcotec.ru','www.artcom.ru','cleanroomshop.ru','github.com']);
 assert.equal(contact.telegram, '@Garmanika');
 assert.equal(contact.email, 'aleks.orlov97@gmail.com');
 const html = fs.readFileSync(path.join(root,'src/index.html'),'utf8');
@@ -36,4 +36,6 @@ const css=fs.readFileSync(path.join(root,'src/styles.css'),'utf8');
 for(const match of css.matchAll(/url\('([^']+)'\)/g)) assert(fs.existsSync(path.join(root,'src',match[1])),'Missing '+match[1]);
 assert(css.includes('prefers-reduced-motion'));
 assert(css.includes(':focus-visible'));
-console.log('PASS: carousel boundaries, four published projects, HTTPS links, owner contacts, unique IDs, anchors, assets, accessibility hooks, no data collection');
+assert.equal((html.match(/class="page-marker/g)||[]).length,projects.length);
+assert(html.includes(`<span>/ ${String(projects.length).padStart(2,'0')}</span>`));
+console.log('PASS: carousel boundaries, five projects, HTTPS links, owner contacts, unique IDs, anchors, assets, accessibility hooks, no data collection');

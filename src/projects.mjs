@@ -38,6 +38,16 @@ export const projects = [
     mobileImage: 'assets/cleanroomshop-mobile.jpg',
     alt: 'Главная страница интернет-магазина Альфа-Лаб с каталогом и баннером стерильной перекиси водорода',
     url: 'https://cleanroomshop.ru/'
+  },
+  {
+    id: 'grain52',
+    name: 'Зерновая 52',
+    category: 'Сайт группы автомобильных компаний',
+    description: 'Сайт группы компаний с разделами новых автомобилей, авто с пробегом, выкупа и сервиса.',
+    image: 'assets/grain52.jpg',
+    mobileImage: 'assets/grain52-mobile.jpg',
+    alt: 'Главная страница сайта группы «Зерновая 52» с разделами автомобилей и сервиса',
+    url: 'https://github.com/garmanika/grain-52'
   }
 ];
 
